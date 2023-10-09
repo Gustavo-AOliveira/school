@@ -1,9 +1,6 @@
 package com.gustavo.aquino.CRUD.controller;
 
-import com.gustavo.aquino.CRUD.entities.Aluno.Aluno;
-import com.gustavo.aquino.CRUD.entities.Aluno.DadosCadastroAluno;
-import com.gustavo.aquino.CRUD.entities.Aluno.DadosDetalhamentoAluno;
-import com.gustavo.aquino.CRUD.entities.Aluno.DadosListagemAluno;
+import com.gustavo.aquino.CRUD.entities.Aluno.*;
 import com.gustavo.aquino.CRUD.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -38,7 +35,14 @@ public class AlunoController {
         var page = repository.findAllByAtivoTrue(pageable).map(DadosListagemAluno::new);
             return ResponseEntity.ok(page);
     }
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizarAluno(@RequestBody @Valid DadosAtualizacaoAluno dados){
+        var aluno = repository.getReferenceById(dados.ra());
+            aluno.atualizar(dados);
+                return ResponseEntity.ok(new DadosDetalhamentoAluno(aluno));
 
+    }
     @DeleteMapping("/delete/{ra}")
     @Transactional
     public ResponseEntity<Void> deletarAluno(@PathVariable Integer ra){

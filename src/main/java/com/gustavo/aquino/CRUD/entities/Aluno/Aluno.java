@@ -20,6 +20,7 @@ public class Aluno {
     private Integer ra;
 
     private String nome;
+
     private String cep;
 
     private Integer numero;
@@ -42,6 +43,20 @@ public class Aluno {
         this.notaPi = dados.notaPi();
     }
 
+    public void atualizar(DadosAtualizacaoAluno dados) {
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.cep() != null){
+            this.cep = dados.cep();
+        }
+        if (dados.numero() != null){
+            this.numero = dados.numero();
+        }
+        if (dados.complemento() != null){
+            this.complemento = dados.complemento();
+        }
+    }
     public void delete(Integer ra){
         this.ativo = false;
     }
