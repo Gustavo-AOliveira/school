@@ -41,6 +41,10 @@ public class Aluno {
         this.notaAdo1 = dados.notaAdo1();
         this.notaPi = dados.notaPi();
     }
+
+    public void delete(Integer ra){
+        this.ativo = false;
+    }
 }
 
 

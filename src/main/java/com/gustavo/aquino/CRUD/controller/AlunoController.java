@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("alunos")
@@ -40,6 +39,13 @@ public class AlunoController {
             return ResponseEntity.ok(page);
     }
 
+    @DeleteMapping("/delete/{ra}")
+    @Transactional
+    public ResponseEntity<Void> deletarAluno(@PathVariable Integer ra){
+        var aluno = repository.getReferenceById(ra);
+            aluno.delete(ra);
+                return ResponseEntity.noContent().build();
+    }
 }
 
 
